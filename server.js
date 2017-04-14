@@ -3,7 +3,7 @@ const hbs = require('hbs'); // Handlebars
 const fs = require('fs');
 
 var app = express();
-var port = 3000;
+const port = process.env.PORT || 3000;
 
 var pageContent = 'This is quite some peace of useless text on this page... But it works, which is GREAT!';
 var currentYear = new Date().getFullYear();
@@ -25,14 +25,14 @@ app.use((req, res, next) => {
 });
 
 // to desplay maintenance page and not continue uncomment below method
-
-app.use((req, res, next) => {
-
-  res.render('maint.hbs', {
-    pageTitle: 'Maintenance all over your place',
-    pageContent: 'We\'re doing maintenance now JANK!'
-  });
-});
+//
+// app.use((req, res, next) => {
+//
+//   res.render('maint.hbs', {
+//     pageTitle: 'Maintenance all over your place',
+//     pageContent: 'We\'re doing maintenance now JANK!'
+//   });
+// });
 
 app.use(express.static(__dirname + '/public'));
 
@@ -66,6 +66,6 @@ app.get('/bad', (req, res) => {
   })
 })
 
-app.listen(port, '0.0.0.0', () => {
-  console.log(`Start app by entering http://localhost:${port} in your browser`);
+app.listen(port, () => {
+  console.log(`Server is up & running on port: ${port} `);
 });
