@@ -44,8 +44,7 @@ app.get('/', (req, res) => {
     siteName: 'Hans\' site',
     pageTitle: 'Home sweet home',
     welcomeText: 'Welcome to my brand new website.... Tot ziens!',
-    pageContent: pageContent,
-    currentYear: currentYear
+    pageContent: pageContent
   })
 });
 
@@ -53,7 +52,6 @@ app.get('/projects', (req, res) => {
   res.render('projects.hbs', {
     pageTitle: 'GitHub projects',
     pageHeader: 'Projects:',
-    currentYear: currentYear,
     pageContent: 'Here you will find an overview of my GitHub Projects'
   });
 });
@@ -61,7 +59,6 @@ app.get('/projects', (req, res) => {
 app.get('/about', (req, res) => {
   res.render('about.hbs', {
     pageTitle: 'Over ons',
-    currentYear: currentYear,
     pageContent: pageContent
   });
 });
