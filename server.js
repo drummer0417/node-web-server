@@ -49,6 +49,15 @@ app.get('/', (req, res) => {
   })
 });
 
+app.get('/projects', (req, res) => {
+  res.render('projects.hbs', {
+    pageTitle: 'GitHub projects',
+    pageHeader: 'Projects:',
+    currentYear: currentYear,
+    pageContent: 'Here you will find an overview of my GitHub Projects'
+  });
+});
+
 app.get('/about', (req, res) => {
   res.render('about.hbs', {
     pageTitle: 'Over ons',
