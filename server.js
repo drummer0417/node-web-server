@@ -13,15 +13,16 @@ app.set('view engine', 'hbs');
 
 // log incomming request
 app.use((req, res, next) => {
-  var msg = `${new Date().toString()}: ${req.method} ${req.url}`;
+    var msg = `${new Date().toString()}: ${req.method} ${req.url}`;
 
-  console.log(msg);
-  fs.appendFile('./log/server.log', `${msg}\n`, (error) => {
-    if (error) {
-      console.log(error);
-    }
-  });
-  next();
+    console.log(msg);
+    fs.appendFile('./log/server.log', `${msg}\n`, (error) => {
+        if (error) {
+            console.log(error);
+        }
+    });
+    console.log(msg);
+    next();
 });
 
 // to desplay maintenance page and not continue uncomment below method
@@ -40,38 +41,38 @@ hbs.registerHelper('getCurrentYear', () => new Date().getFullYear());
 hbs.registerHelper('screamIt', (text) => text.toUpperCase());
 
 app.get('/', (req, res) => {
-  res.render('welcome.hbs', {
-    siteName: 'Hans\' site',
-    pageTitle: 'Home sweet home',
-    welcomeText: 'Welcome to my brand new website.... Tot ziens!',
-    pageContent: pageContent
-  })
+    res.render('welcome.hbs', {
+        siteName: 'Hans\' site',
+        pageTitle: 'Home sweet home',
+        welcomeText: 'Welcome to my brand new website.... Tot ziens!',
+        pageContent: pageContent
+    })
 });
 
 app.get('/projects', (req, res) => {
-  res.render('projects.hbs', {
-    pageTitle: 'GitHub projects',
-    pageHeader: 'Projects:',
-    pageContent: 'Here you will find an overview of my GitHub Projects'
-  });
+    res.render('projects.hbs', {
+        pageTitle: 'GitHub projects',
+        pageHeader: 'Projects:',
+        pageContent: 'Here you will find an overview of my GitHub Projects'
+    });
 });
 
 app.get('/about', (req, res) => {
-  res.render('about.hbs', {
-    pageTitle: 'Over ons',
-    pageContent: pageContent
-  });
+    res.render('about.hbs', {
+        pageTitle: 'Over ons',
+        pageContent: pageContent
+    });
 });
 
 app.get('/bad', (req, res) => {
-  res.send({
-    error: 'Bad request. Check your url, correct it and try again... mafkees',
-    nickname: ['slome',
-      'mafkees', 'gek'
-    ]
-  })
+    res.send({
+        error: 'Bad request. Check your url, correct it and try again... mafkees',
+        nickname: ['slome',
+            'mafkees', 'gek'
+        ]
+    })
 })
 
 app.listen(port, () => {
-  console.log(`Server is up & running on port: ${port} `);
+    console.log(`Server is up & running on port: ${port} `);
 });
