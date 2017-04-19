@@ -2,6 +2,7 @@ const express = require('express');
 const hbs = require('hbs'); // Handlebars
 const fs = require('fs');
 const Mailgun = require('mailgun').Mailgun;
+const url = require('url');
 
 var app = express();
 const port = process.env.PORT || 3000;
@@ -60,17 +61,22 @@ app.get('/projects', (req, res) => {
 });
 
 app.get('/mail', (req, res) => {
+
+  var parts = url.parse(req.url, true);
+  var query = parts.query;
+  console.log(query.text);
+
   var mg = new Mailgun('key-9379c4aa11ce3ea8e13a3371b34fa770');
-  mg.sendText('hans.vanmeurs@gmail.com', ['drummer0417'],
+  mg.sendText('PictShare <pictshare@androidappfactory.nl>', ['drummer0417@gmail.com'],
     'I: Test mailtje',
-    'Dit is een testmeeltje verzonden door mailgun',
+    `Dit is een testmeeltje verzonden door mailgun.\nEn dit is de inhoud\n${query.text}`,
     'noreply@androidappfactory.nl', {}, (err) => {
       if (err) {
         console.log(`Oops Error: ${err}`);;
       } else {
         console.log('Mail sent successful');
       }
-    })
+    });
 })
 
 app.get('/about', (req, res) => {
