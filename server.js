@@ -1,6 +1,7 @@
 const express = require('express');
 const hbs = require('hbs'); // Handlebars
 const fs = require('fs');
+const Mailgun = require('mailgun').Mailgun;
 
 var app = express();
 const port = process.env.PORT || 3000;
@@ -57,6 +58,20 @@ app.get('/projects', (req, res) => {
   });
   console.log(`the testVar\'s value is "${testVar}"`);
 });
+
+app.get('/mail', (req, res) => {
+  var mg = new Mailgun('key-9379c4aa11ce3ea8e13a3371b34fa770');
+  mg.sendText('hans.vanmeurs@gmail.com', ['drummer0417'],
+    'I: Test mailtje',
+    'Dit is een testmeeltje verzonden door mailgun',
+    'noreply@androidappfactory.nl', {}, (err) => {
+      if (err) {
+        console.log(`Oops Error: ${err}`);;
+      } else {
+        console.log('Mail sent successful');
+      }
+    })
+})
 
 app.get('/about', (req, res) => {
   res.render('about.hbs', {
