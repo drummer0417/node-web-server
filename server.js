@@ -55,6 +55,7 @@ app.get('/projects', (req, res) => {
     pageHeader: 'Projects:',
     pageContent: 'Here you will find an overview of my GitHub Projects'
   });
+  console.log(`the testVar\'s value is "${testVar}"`);
 });
 
 app.get('/about', (req, res) => {
